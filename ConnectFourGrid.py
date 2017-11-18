@@ -23,7 +23,7 @@ def empty_grid():
 def agent_circle(x, y):
     turtle.pencolor("blue")
     turtle.fillcolor("blue")
-    turtle.goto(x-0.5, y-0.8)
+    turtle.goto(x+0.5, y+0.2)
     turtle.begin_fill()
     turtle.pd()
     turtle.circle(0.3)
@@ -33,7 +33,7 @@ def agent_circle(x, y):
 def player_circle(x, y):
     turtle.pencolor("red")
     turtle.fillcolor("red")
-    turtle.goto(x-0.5, y-0.8)
+    turtle.goto(x + 0.5, y + 0.2)
     turtle.begin_fill()
     turtle.pd()
     turtle.circle(0.3)
@@ -46,11 +46,11 @@ def main():
     turtle.tracer(0, 0)
     screen_limit(7,6)
     empty_grid()
-    agent_circle(1,1)
+    agent_circle(0,0)
     player_circle(5,2)
     turtle.update()
     time.sleep(10)
 
-#just checking
+
 if __name__ == '__main__':
     main()
