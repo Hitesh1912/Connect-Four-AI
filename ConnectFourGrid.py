@@ -51,6 +51,6 @@ def main():
     turtle.update()
     time.sleep(10)
 
-
+#just checking
 if __name__ == '__main__':
     main()
