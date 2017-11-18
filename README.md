@@ -1,1 +1,1 @@
-# Connect4ai_bb_phoenix
+# FTS project
