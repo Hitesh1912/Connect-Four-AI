@@ -1,5 +1,17 @@
 import turtle,time
 
+def printing_on_screen(x,y,z):
+
+    turtle.tracer(0, 0)
+    screen_limit(7,6)
+    empty_grid()
+    if z==1:
+     agent_circle(y,x)
+    if z==2:
+     player_circle(y,x)
+    turtle.update()
+    time.sleep(10)
+
 def screen_limit(w,h):
     turtle.setup(width=w*75,height=h*75)
     turtle.setworldcoordinates(0,0,w,h)
@@ -42,15 +54,6 @@ def player_circle(x, y):
 
 
 
-def main():
-    turtle.tracer(0, 0)
-    screen_limit(7,6)
-    empty_grid()
-    agent_circle(0,0)
-    player_circle(5,2)
-    turtle.update()
-    time.sleep(10)
 
 
-if __name__ == '__main__':
-    main()
+
