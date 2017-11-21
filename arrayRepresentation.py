@@ -11,6 +11,19 @@ import ConnectFourGrid
 #     else:
 #         return randomAgent(validRowValue)
 
+def victory(arrayRep,x):
+    for i in range(len(arrayRep)):
+        for j in range(len(arrayRep[i])):
+            if arrayRep[i][j]==x:
+                if j<=3:
+                    if (arrayRep[i+1][j]==x and arrayRep[i+2][j]==x and arrayRep[i+3][j]==x):
+                        print "x wins",x
+                        return 1
+                elif (arrayRep[i-1][j]== x and arrayRep[i-2][j]== x and arrayRep[i-3][j]== x):
+                    print "x wins",x
+                    return 1
+    return 0
+
 def randomAgent(validRowValue):
         column = int(input("Please enter a column between 0-6: "))
         if 0 <= column <= 6:
@@ -22,8 +35,16 @@ def randomAgent(validRowValue):
             return randomAgent(validRowValue)
 
 
-def agentMove(validRowValue):
+def agentMove(validRowValue,arrayRep):
     #move = 0
+    for i in range(len(arrayRep)):
+        for j in range(len(arrayRep[i])):
+            if arrayRep[i][j]==1 and arrayRep[i][j+1]==1:
+                print "Checking here::"
+                if j<6:
+                    return j+2
+                else:
+                    return j-1
     move = random.randint(0, 6)
     print "move", move
     if validRowValue[move] < 6:
@@ -39,35 +60,29 @@ validRowValue = [0 for x in range(7)]
 validRowValue[3] += 1
 ConnectFourGrid.printing_on_screen(0, 3,1)
 #print validRowValue
-count = 1
 randomAgentMove = 0
 agentColumnNumber = 0
 agentRow = 0
 randomRow = 0
 while flag == 0:
-    count += 2
     randomAgentMove = randomAgent(validRowValue)
-    #print "debugging", randomAgentMove
     randomRow = validRowValue[randomAgentMove]
     arrayRep[randomRow][randomAgentMove] = 2
     validRowValue[randomAgentMove] += 1
     ConnectFourGrid.printing_on_screen(randomRow,randomAgentMove,2)
-    # print arrayRep
-    #print "before vali", validRowValue
-    agentColumnNumber = agentMove(validRowValue)
-
-    #print "debugging22", agentColumnNumber
-    #print "arr", arrayRep
-    #print "vali", validRowValue
+    flag=victory(arrayRep,2)
+    if flag==1:
+        break
+    agentColumnNumber = agentMove(validRowValue,arrayRep)
     agentRow = validRowValue[agentColumnNumber]
     arrayRep[agentRow][agentColumnNumber] = 1
     validRowValue[agentColumnNumber] += 1
     ConnectFourGrid.printing_on_screen(agentRow, agentColumnNumber,1)
-    # print arrayRep
-    #print "count",count
-    if count == 35:
+    flag=victory(arrayRep, 1)
+    if flag==1:
         break
-#print arrayRep
-#print "validRowValue:", validRowValue
+    for x in validRowValue:#Checking for Tie/Draw
+        if x==6:
+            break;
 
 
