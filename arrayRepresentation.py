@@ -84,14 +84,14 @@ def agentMove(validRowValue,arrayRep):
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
             if j<4:
-                if arrayRep[i][j]==1 and arrayRep[i][j+1]==1and arrayRep[i][j+2]==1:
+                if arrayRep[i][j]==1 and arrayRep[i][j+1]==1 and arrayRep[i][j+2]==1:
                     print "Checking here::"
                     if j<4 and validRowValue[j+3] == i:
                         return j+3
                     elif validRowValue[j-1] == i:
                         return j-1
             else:
-                if arrayRep[i][j]==1 and arrayRep[i][j-1]==1and arrayRep[i][j-2]==1:
+                if arrayRep[i][j]==1 and arrayRep[i][j-1]==1 and arrayRep[i][j-2]==1:
                     print "Checking here::"
                     if j>=4 and validRowValue[j-3] == i:
                         return j-3
