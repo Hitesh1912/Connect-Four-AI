@@ -97,6 +97,22 @@ def agentMove(validRowValue,arrayRep):
                         return j-3
                     elif validRowValue[j+1] == i:
                         return j+1
+    for i in range(len(arrayRep)):
+        for j in range(len(arrayRep[i])):
+            if j < 4:
+                 if arrayRep[i][j] == 2 and arrayRep[i][j + 1] == 2 and arrayRep[i][j + 2] == 2:
+                    print "Checking here::"
+                    if j < 4 and validRowValue[j + 3] == i:
+                         return j + 3
+                    elif validRowValue[j - 1] == i:
+                        return j - 1
+            else:
+                if arrayRep[i][j] == 2 and arrayRep[i][j - 1] == 2 and arrayRep[i][j - 2] == 2:
+                     print "Checking here::"
+                     if j >= 4 and validRowValue[j - 3] == i:
+                        return j - 3
+                     elif validRowValue[j + 1] == i:
+                        return j + 1
     move = random.randint(0, 6)
     print "move", move
     if validRowValue[move] < 6:
@@ -139,5 +155,3 @@ while flag == 0:
     for x in validRowValue:#Checking for Tie/Draw
         if x==6:
             break;
-
-
