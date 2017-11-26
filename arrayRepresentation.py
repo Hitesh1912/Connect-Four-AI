@@ -1,7 +1,7 @@
 import random
 import ConnectFourGrid
 
-
+#using random agent
 # def randomAgent(validRowValue):
 #     #randomcol = 0
 #     randomcol = random.randint(0, 6)
@@ -69,14 +69,14 @@ def victory(arrayRep,x):
     return 0
 
 def randomAgent(validRowValue):
-        column = int(input("Please enter a column between 0-6: "))
-        if 0 <= column <= 6:
-            if validRowValue[column] < 6:
-                return column
-            else:
-                return randomAgent(validRowValue)
+    column = int(input("Please enter a column between 0-6: "))
+    if 0 <= column <= 6:
+        if validRowValue[column] < 6:
+            return column
         else:
             return randomAgent(validRowValue)
+    else:
+        return randomAgent(validRowValue)
 
 
 def agentMove(validRowValue,arrayRep):
@@ -86,33 +86,44 @@ def agentMove(validRowValue,arrayRep):
             if j<4:
                 if arrayRep[i][j]==1 and arrayRep[i][j+1]==1 and arrayRep[i][j+2]==1:
                     print "Checking here::"
-                    if j<4 and validRowValue[j+3] == i:
+                    if validRowValue[j+3] == i:
                         return j+3
                     elif validRowValue[j-1] == i:
                         return j-1
             else:
                 if arrayRep[i][j]==1 and arrayRep[i][j-1]==1 and arrayRep[i][j-2]==1:
                     print "Checking here::"
-                    if j>=4 and validRowValue[j-3] == i:
+                    if validRowValue[j-3] == i:
                         return j-3
                     elif validRowValue[j+1] == i:
                         return j+1
+
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
+            # Checking for opponent vertical connect-3
+            if arrayRep[i-1][j] == 2 and arrayRep[i-2][j] == 2 and arrayRep[i-3][j] == 2:
+                print "Checking here Vertical::"
+                if validRowValue[j] == i:
+                    return j
+            # Checking for opponent horizontal connect-3
             if j < 4:
-                 if arrayRep[i][j] == 2 and arrayRep[i][j + 1] == 2 and arrayRep[i][j + 2] == 2:
+                if arrayRep[i][j] == 2 and arrayRep[i][j + 1] == 2 and arrayRep[i][j + 2] == 2:
                     print "Checking here::"
-                    if j < 4 and validRowValue[j + 3] == i:
-                         return j + 3
+                    if validRowValue[j + 3] == i:
+                        return j + 3
                     elif validRowValue[j - 1] == i:
                         return j - 1
-            else:
+            elif j > 4:
                 if arrayRep[i][j] == 2 and arrayRep[i][j - 1] == 2 and arrayRep[i][j - 2] == 2:
-                     print "Checking here::"
-                     if j >= 4 and validRowValue[j - 3] == i:
+                    print "Checking here::"
+                    if validRowValue[j - 3] == i:
                         return j - 3
-                     elif validRowValue[j + 1] == i:
+                    elif validRowValue[j + 1] == i:
                         return j + 1
+
+
+
+    # selecting random move
     move = random.randint(0, 6)
     print "move", move
     if validRowValue[move] < 6:
