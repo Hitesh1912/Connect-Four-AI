@@ -83,6 +83,12 @@ def agentMove(validRowValue,arrayRep):
     #move = 0
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
+            #Vertical connect 4 Attack
+            if arrayRep[i-1][j] == 1 and arrayRep[i-2][j] == 1 and arrayRep[i-3][j] == 1:
+                print "Checking here Vertical::"
+                if validRowValue[j] == i:
+                    return j
+            #Horizontal connect 4 Attack
             if j<4:
                 if arrayRep[i][j]==1 and arrayRep[i][j+1]==1 and arrayRep[i][j+2]==1:
                     print "Checking here::"
@@ -90,22 +96,24 @@ def agentMove(validRowValue,arrayRep):
                         return j+3
                     elif validRowValue[j-1] == i:
                         return j-1
-            else:
-                if arrayRep[i][j]==1 and arrayRep[i][j-1]==1 and arrayRep[i][j-2]==1:
-                    print "Checking here::"
-                    if validRowValue[j-3] == i:
-                        return j-3
-                    elif validRowValue[j+1] == i:
-                        return j+1
+            #Disjoint horizontal connect 4 -Attack
+            if j < 4:
+                if arrayRep[i][j] == 1 and arrayRep[i][j + 3] == 1:
+                    if arrayRep[i][j + 1] == 1 and arrayRep[i][j + 2] == 0:
+                        if validRowValue[j + 2] == i:
+                            return j + 2
+                    elif arrayRep[i][j + 1] == 0 and arrayRep[i][j + 2] == 1:
+                        if validRowValue[j + 1] == i:
+                            return j + 1
 
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
-            # Checking for opponent vertical connect-3
+            # Checking for opponent vertical connect-4
             if arrayRep[i-1][j] == 2 and arrayRep[i-2][j] == 2 and arrayRep[i-3][j] == 2:
                 print "Checking here Vertical::"
                 if validRowValue[j] == i:
                     return j
-            # Checking for opponent horizontal connect-3
+            # Checking for opponent horizontal connect-4
             if j < 4:
                 if arrayRep[i][j] == 2 and arrayRep[i][j + 1] == 2 and arrayRep[i][j + 2] == 2:
                     print "Checking here::"
@@ -113,13 +121,16 @@ def agentMove(validRowValue,arrayRep):
                         return j + 3
                     elif validRowValue[j - 1] == i:
                         return j - 1
-            elif j > 4:
-                if arrayRep[i][j] == 2 and arrayRep[i][j - 1] == 2 and arrayRep[i][j - 2] == 2:
-                    print "Checking here::"
-                    if validRowValue[j - 3] == i:
-                        return j - 3
-                    elif validRowValue[j + 1] == i:
-                        return j + 1
+            # Checking the disjoint horizontal connect-4
+            if j< 4:
+                if arrayRep[i][j]==2 and arrayRep[i][j+3]==2:
+                    if arrayRep[i][j+1]==2 and arrayRep[i][j+2]==0:
+                        if validRowValue[j+2] == i:
+                            return j+2
+                    elif arrayRep[i][j+1]==0 and arrayRep[i][j+2]==2:
+                        if validRowValue[j + 1] == i:
+                         return j+1
+
 
 
 
@@ -129,7 +140,7 @@ def agentMove(validRowValue,arrayRep):
     if validRowValue[move] < 6:
         return move
     else:
-        return agentMove(validRowValue)
+        return agentMove(validRowValue,arrayRep)
 
 arrayRep = [[0 for x in range(7)] for y in range(6)]
 flag = 0
