@@ -14,10 +14,10 @@ def userInput(arrayRep,validRowValue):
 
 
 def agentMove(arrayRep,validRowValue):
-    # agentObj=Negamax(arrayRep,validRowValue,4)
-    # finalColumnNumber=agentObj.getMove(arrayRep,validRowValue,1,2)
-    # return finalColumnNumber
-    return hardCodedAI(arrayRep,validRowValue)
+    agentObj=Negamax(arrayRep,validRowValue,3)
+    finalColumnNumber=agentObj.getMove(arrayRep,validRowValue,1,2)
+    return finalColumnNumber
+    #return hardCodedAI(arrayRep,validRowValue)
 
 
 def randomAgent(arrayRep,validRowValue):

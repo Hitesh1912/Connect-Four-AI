@@ -1,32 +1,30 @@
 def check_move(x, arrRep, validRowValue, playerNumber):
     allowed = True
-
     if validRowValue[x] >= 6:
         allowed = False
-
     rowNumber = validRowValue[x]
 
     if allowed:
         arrRep[validRowValue[x]][x] = playerNumber
-
         validRowValue[x] += 1
-
     return allowed, rowNumber
 
 
-def game_over(arrRep, agent_number, opponent_number, current_column, legalRowNumber):
+def game_over(arrRep, agent_number, opponent_number, current_column, validRowValue):
     isWinningMove = victory(arrRep, agent_number)
-
     if isWinningMove == 1:
-
-        return agent_number, isWinningMove
-
+        return agent_number, True
     else:
-
         isWinningMove = victory(arrRep, opponent_number)
-
     if isWinningMove == 1:
-        return opponent_number, isWinningMove
+        return opponent_number, True
+    count=0
+    for i in range(len(validRowValue)):
+        if validRowValue[i] == 6:
+            count += 1
+    if count == 7:
+        return None,True
+    return None,False #No one has won
 
 
 def victory(arrayRep, x):
