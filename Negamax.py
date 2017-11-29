@@ -31,7 +31,7 @@ class Negamax:
         best_action=None
         for col in range(0,6,1):
             current_column=col
-            isAllowed,legalRowNumber= game.check_move(current_column,arrRep,validRowValue,agent_number)
+            isAllowed,validRowValue= game.check_move(current_column,arrRep,validRowValue,agent_number)
             if not isAllowed:
                 continue
             winner,game_over = game.game_over(arrRep, agent_number,opponent_number, current_column, validRowValue)
@@ -47,12 +47,14 @@ class Negamax:
                 best_currscore *= -1
 
             #Previous Arrayrep is restored.
+            print "before",arrRep
             rowNumber =validRowValue[current_column]
             print "Fail-1",rowNumber
             print "Fail-2",current_column
-            arrRep[rowNumber][current_column]=0
+            print "vrv",validRowValue
+            arrRep[rowNumber-1][current_column]=0
             validRowValue[current_column]-= 1
-
+            print "vrv-changes", validRowValue
             print "Seeing if changes restored", arrRep
             if best_currscore > best_score:
                 best_score = best_currscore

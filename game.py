@@ -2,12 +2,12 @@ def check_move(x, arrRep, validRowValue, playerNumber):
     allowed = True
     if validRowValue[x] >= 6:
         allowed = False
-    rowNumber = validRowValue[x]
+    #rowNumber = validRowValue[x]
 
     if allowed:
         arrRep[validRowValue[x]][x] = playerNumber
         validRowValue[x] += 1
-    return allowed, rowNumber
+    return allowed, validRowValue
 
 
 def game_over(arrRep, agent_number, opponent_number, current_column, validRowValue):
