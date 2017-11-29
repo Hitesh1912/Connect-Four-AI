@@ -1,4 +1,3 @@
-import arrayRepresentation
 
 def __init__(self,arrRep,validRowValue,max_depth=4):
 
