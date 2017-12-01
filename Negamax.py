@@ -126,38 +126,63 @@ class Negamax:
 
                         if i <= 2 and j <= 3:
                             if arrayRep[i + 1][j + 1] == agent_number and arrayRep[i + 2][j + 2] == agent_number:
-                                if validRowValue[j+3] == i+3:
-                                    return 9995
-                                if j!=0 and i!=0:
-                                    if validRowValue[j-1] == i-1:
-                                        return 9994
-
+                                if validRowValue[j + 3] == i + 3:
+                                    return 9982
+                                if j != 0 and i != 0:
+                                    if validRowValue[j - 1] == i - 1:
+                                        return 9981
+                            if arrayRep[i + 3][j + 3] == agent_number:
+                                if arrayRep[i + 2][j + 2] == agent_number and arrayRep[i + 1][j + 1] == 0 and  validRowValue[j + 1] == i + 1:
+                                    return 9970
+                                if arrayRep[i + 2][j + 2] == 0 and arrayRep[i + 1][j + 1] == agent_number and validRowValue[j + 2] == i + 1:
+                                    return 9970
 
                         if i <= 2 and j >= 3:
 
                             if arrayRep[i + 1][j - 1] == agent_number and arrayRep[i + 2][j - 2] == agent_number:
-                                if validRowValue[j-3] == i+3:
-                                    return 9993
-                                if j<6 and i!=0:
-                                    if validRowValue[j+1] == i-1:
-                                        return 9992
+                                if validRowValue[j - 3] == i + 3:
+                                    return 9980
+                                if j < 6 and i != 0:
+                                    if validRowValue[j + 1] == i - 1:
+                                        return 9979
+                            if arrayRep[i + 3][j - 3] == agent_number:
+                                if arrayRep[i + 2][j - 2] == agent_number and arrayRep[i + 1][j - 1] == 0 and \
+                                        validRowValue[j - 1] == i + 1:
+                                    return 9965
+                                if arrayRep[i + 2][j - 2] == 0 and arrayRep[i + 1][j - 1] == agent_number and \
+                                        validRowValue[j - 2] == i + 2:
+                                    return 9965
 
                         if i >= 3 and j >= 3:
 
-                            if arrayRep[i - 1][j - 1] == agent_number and arrayRep[i - 2][j - 2] == agent_number :
-                                if validRowValue[j-3] == i-3:
-                                    return 9991
-                                if j<6 and i<6:
-                                    if validRowValue[j+1] == i+1:
-                                        return 9990
+                            if arrayRep[i - 1][j - 1] == agent_number and arrayRep[i - 2][j - 2] == agent_number:
+                                if validRowValue[j - 3] == i - 3:
+                                    return 9978
+                                if j < 6 and i < 6:
+                                    if validRowValue[j + 1] == i + 1:
+                                        return 9977
+                            if arrayRep[i - 3][j - 3] == agent_number:
+                                if arrayRep[i - 2][j - 2] == agent_number and arrayRep[i - 1][j - 1] == 0 and \
+                                        validRowValue[j - 1] == i - 1:
+                                    return 9960
+                                if arrayRep[i - 2][j - 2] == 0 and arrayRep[i - 1][j - 1] == agent_number and \
+                                        validRowValue[j - 2] == i - 2:
+                                    return 9960
 
                         if i >= 3 and j <= 3:
                             if arrayRep[i - 1][j + 1] == agent_number and arrayRep[i - 2][j + 2] == agent_number:
-                                if validRowValue[j+3] == i-3:
-                                    return 9989
-                                if j!=0 and i<6:
-                                    if validRowValue[j-1] == i+1:
-                                        return 9988
+                                if validRowValue[j + 3] == i - 3:
+                                    return 9976
+                                if j != 0 and i < 6:
+                                    if validRowValue[j - 1] == i + 1:
+                                        return 9975
+                            if arrayRep[i - 3][j + 3] == agent_number:
+                                if arrayRep[i - 2][j + 2] == agent_number and arrayRep[i - 1][j + 1] == 0 and \
+                                        validRowValue[j + 1] == i - 1:
+                                    return 9955
+                                if arrayRep[i - 2][j + 2] == 0 and arrayRep[i - 1][j + 1] == agent_number and \
+                                        validRowValue[j + 2] == i - 2:
+                                    return 9955
 
             for i in range(len(arrayRep)):
 
@@ -217,6 +242,12 @@ class Negamax:
                                 if j!=0 and i!=0:
                                     if validRowValue[j-1] == i-1:
                                         return 9981
+                            if arrayRep[i+3][j+3]==opponent_number:
+                                if arrayRep[i+2][j+2]==opponent_number and arrayRep[i+1][j+1]==0 and validRowValue[j+1]==i+1:
+                                    return 9970
+                                if arrayRep[i+2][j+2]==0 and arrayRep[i+1][j+1]==opponent_number and validRowValue[j+2]==i+1:
+                                    return 9970
+
 
 
                         if i <= 2 and j >= 3:
@@ -227,6 +258,11 @@ class Negamax:
                                 if j<6 and i!=0:
                                     if validRowValue[j+1] == i-1:
                                         return 9979
+                            if arrayRep[i+3][j-3]==opponent_number:
+                                if arrayRep[i+2][j-2]==opponent_number and arrayRep[i+1][j-1]==0 and validRowValue[j-1]==i+1:
+                                    return 9965
+                                if arrayRep[i+2][j-2]==0 and arrayRep[i+1][j-1]==opponent_number and validRowValue[j-2]==i+2:
+                                    return 9965
 
                         if i >= 3 and j >= 3:
 
@@ -236,6 +272,11 @@ class Negamax:
                                 if j<6 and i<6:
                                     if validRowValue[j+1] == i+1:
                                         return 9977
+                            if arrayRep[i-3][j-3]==opponent_number:
+                                if arrayRep[i-2][j-2]==opponent_number and arrayRep[i-1][j-1]==0 and validRowValue[j-1]==i-1:
+                                    return 9960
+                                if arrayRep[i-2][j-2]==0 and arrayRep[i-1][j-1]==opponent_number and validRowValue[j-2]==i-2:
+                                    return 9960
 
                         if i >= 3 and j <= 3:
                             if arrayRep[i - 1][j + 1] == opponent_number and arrayRep[i - 2][j + 2] == opponent_number:
@@ -244,6 +285,11 @@ class Negamax:
                                 if j!=0 and i<6:
                                     if validRowValue[j-1] == i+1:
                                         return 9975
+                            if arrayRep[i-3][j+3]==opponent_number:
+                                if arrayRep[i-2][j+2]==opponent_number and arrayRep[i-1][j+1]==0 and validRowValue[j+1]==i-1:
+                                    return 9955
+                                if arrayRep[i-2][j+2]==0 and arrayRep[i-1][j+1]==opponent_number and validRowValue[j+2]==i-2:
+                                    return 9955
             import random
 
             randomScore = random.randint(0, 80)

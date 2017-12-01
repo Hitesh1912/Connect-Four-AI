@@ -18,7 +18,7 @@ def userInput(arrayRep,validRowValue):
 
 def agentMove(arrayRep,validRowValue):
     start_time = time.time()
-    agentObj=Negamax(arrayRep,validRowValue,3)
+    agentObj=Negamax(arrayRep,validRowValue,5)
     finalColumnNumber=agentObj.getMove(arrayRep,validRowValue,1,2)
     print("--- %s seconds ---" % (time.time() - start_time))
     return finalColumnNumber

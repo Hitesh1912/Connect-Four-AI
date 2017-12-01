@@ -15,7 +15,8 @@ def gameMoves():
         arrayRep[rowNumber][colInputFromUser] = 2
         validRowValue[colInputFromUser] += 1
         if game.victory(arrayRep,2)==1 or game.tie(arrayRep):
-            time.sleep(5)
+            print"Red won"
+            time.sleep(10)
             break
         colInputFromAgent = agent.agentMove(arrayRep,validRowValue)
         rowNumberAgent = validRowValue[colInputFromAgent]
@@ -23,7 +24,8 @@ def gameMoves():
         arrayRep[rowNumberAgent][colInputFromAgent] = 1
         validRowValue[colInputFromAgent] += 1
         if game.victory(arrayRep, 1) == 1 or game.tie(arrayRep):
-            time.sleep(5)
+            print "Blue won"
+            time.sleep(10)
             break
 
 
