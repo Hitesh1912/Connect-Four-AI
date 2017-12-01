@@ -1,6 +1,6 @@
 
 import game
-
+import random
 class Negamax:
     def __init__(self,arrRep,validRowValue,max_depth):
         self.max_depth = max_depth
@@ -10,7 +10,15 @@ class Negamax:
 
     def getMove(self,arrRep,validRowValue,agent_number,opponent_number):
         move, score = self.negaMaxEval(arrRep, agent_number,opponent_number,0,validRowValue,-99999,10000)
-        #print score
+        # if move == None:
+        #     number = random.randint(0, 6)
+        #     print "before while", number
+        #     while validRowValue[number] > 6:
+        #         number = random.randint(0, 6)
+        #         print "Inside while", number
+        #     print "Entering number",number
+        #     return number
+        # print "Final:",score
         return move
 
     def negaMaxEval(self,arrRep,agent_number,opponent_number,depth,validRowValue,alpha,beta):
@@ -26,9 +34,9 @@ class Negamax:
             self.stateScore[hashValue]=score
             return None,score
 
-        best_score=-999
+        best_score=-99999999
         best_action=None
-        for col in range(0,6,1):
+        for col in range(0,7,1):
             current_column=col
             isAllowed,validRowValue= game.check_move(current_column,arrRep,validRowValue,agent_number)
             if not isAllowed:
@@ -56,6 +64,7 @@ class Negamax:
             if alpha >= beta:
                 break
         if best_action is None:
+            print "I was here"
             best_score=self.evaluation_func(arrRep,validRowValue,agent_number,opponent_number)
         self.stateScore[hashValue]=best_score
         return best_action, best_score
@@ -78,7 +87,7 @@ class Negamax:
 
                     # Horizontal connect 4 Attack
 
-                    if j <= 4:
+                    if j < 4:
 
                         if arrayRep[i][j] == agent_number and arrayRep[i][j + 1] == agent_number and arrayRep[i][j + 2] == agent_number:
 
@@ -87,11 +96,11 @@ class Negamax:
                             if validRowValue[j + 3] == i:
 
                                 print "return j + 3"
-                                return 10000
+                                return 9999
 
                             elif validRowValue[j - 1] == i:
                                 print "return j -1"
-                                return 10000
+                                return 9998
 
                                 # return j - 1
 
@@ -104,14 +113,51 @@ class Negamax:
                             if arrayRep[i][j + 1] == agent_number and arrayRep[i][j + 2] == 0:
 
                                 if validRowValue[j + 2] == i:
-                                    return 10000
+                                    return 9997
                                     # return j + 2
 
                             elif arrayRep[i][j + 1] == 0 and arrayRep[i][j + 2] == agent_number:
 
                                 if validRowValue[j + 1] == i:
-                                    return 10000
+                                    return 9996
                                     # return j + 1
+                    #diagonal attack- 4
+                    if arrayRep[i][j] == agent_number:
+
+                        if i <= 2 and j <= 3:
+                            if arrayRep[i + 1][j + 1] == agent_number and arrayRep[i + 2][j + 2] == agent_number:
+                                if validRowValue[j+3] == i+3:
+                                    return 9995
+                                if j!=0 and i!=0:
+                                    if validRowValue[j-1] == i-1:
+                                        return 9994
+
+
+                        if i <= 2 and j >= 3:
+
+                            if arrayRep[i + 1][j - 1] == agent_number and arrayRep[i + 2][j - 2] == agent_number:
+                                if validRowValue[j-3] == i+3:
+                                    return 9993
+                                if j<6 and i!=0:
+                                    if validRowValue[j+1] == i-1:
+                                        return 9992
+
+                        if i >= 3 and j >= 3:
+
+                            if arrayRep[i - 1][j - 1] == agent_number and arrayRep[i - 2][j - 2] == agent_number :
+                                if validRowValue[j-3] == i-3:
+                                    return 9991
+                                if j<6 and i<6:
+                                    if validRowValue[j+1] == i+1:
+                                        return 9990
+
+                        if i >= 3 and j <= 3:
+                            if arrayRep[i - 1][j + 1] == agent_number and arrayRep[i - 2][j + 2] == agent_number:
+                                if validRowValue[j+3] == i-3:
+                                    return 9989
+                                if j!=0 and i<6:
+                                    if validRowValue[j-1] == i+1:
+                                        return 9988
 
             for i in range(len(arrayRep)):
 
@@ -124,7 +170,7 @@ class Negamax:
                         #print "Checking here Vertical::"
 
                         if validRowValue[j] == i:
-                            return 9999
+                            return 9987
                             # return j
 
                     # Checking for opponent horizontal connect-4
@@ -136,12 +182,12 @@ class Negamax:
                             #print "Checking here::"
 
                             if validRowValue[j + 3] == i:
-                                return 9999
+                                return 9986
 
                                 # return j + 3
 
                             elif validRowValue[j - 1] == i:
-                                return 9999
+                                return 9985
 
                                 # return j - 1
 
@@ -154,16 +200,52 @@ class Negamax:
                             if arrayRep[i][j + 1] == opponent_number and arrayRep[i][j + 2] == 0:
 
                                 if validRowValue[j + 2] == i:
-                                    return 9999
+                                    return 9984
                                     # return j + 2
 
                             elif arrayRep[i][j + 1] == 0 and arrayRep[i][j + 2] == opponent_number:
 
                                 if validRowValue[j + 1] == i:
-                                    return 9999
+                                    return 9983
                                     # return j + 1
+                    if arrayRep[i][j] == opponent_number:
+
+                        if i <= 2 and j <= 3:
+                            if arrayRep[i + 1][j + 1] == opponent_number and arrayRep[i + 2][j + 2] == opponent_number:
+                                if validRowValue[j+3] == i+3:
+                                    return 9982
+                                if j!=0 and i!=0:
+                                    if validRowValue[j-1] == i-1:
+                                        return 9981
+
+
+                        if i <= 2 and j >= 3:
+
+                            if arrayRep[i + 1][j - 1] == opponent_number and arrayRep[i + 2][j - 2] == opponent_number:
+                                if validRowValue[j-3] == i+3:
+                                    return 9980
+                                if j<6 and i!=0:
+                                    if validRowValue[j+1] == i-1:
+                                        return 9979
+
+                        if i >= 3 and j >= 3:
+
+                            if arrayRep[i - 1][j - 1] == opponent_number and arrayRep[i - 2][j - 2] == opponent_number :
+                                if validRowValue[j-3] == i-3:
+                                    return 9978
+                                if j<6 and i<6:
+                                    if validRowValue[j+1] == i+1:
+                                        return 9977
+
+                        if i >= 3 and j <= 3:
+                            if arrayRep[i - 1][j + 1] == opponent_number and arrayRep[i - 2][j + 2] == opponent_number:
+                                if validRowValue[j+3] == i-3:
+                                    return 9976
+                                if j!=0 and i<6:
+                                    if validRowValue[j-1] == i+1:
+                                        return 9975
             import random
 
-            randomcol = random.randint(0, 8)
-            print "Checking here", randomcol
-            return randomcol
+            randomScore = random.randint(0, 80)
+            print "Checking here", randomScore
+            return randomScore

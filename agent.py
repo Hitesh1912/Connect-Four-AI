@@ -18,12 +18,17 @@ def userInput(arrayRep,validRowValue):
 
 def agentMove(arrayRep,validRowValue):
     start_time = time.time()
-    agentObj=Negamax(arrayRep,validRowValue,4)
+    agentObj=Negamax(arrayRep,validRowValue,3)
     finalColumnNumber=agentObj.getMove(arrayRep,validRowValue,1,2)
     print("--- %s seconds ---" % (time.time() - start_time))
     return finalColumnNumber
     #return hardCodedAI(arrayRep,validRowValue)
-
+# def userInput(arrayRep,validRowValue):
+#     start_time = time.time()
+#     agentObj=Negamax(arrayRep,validRowValue,4)
+#     finalColumnNumber=agentObj.getMove(arrayRep,validRowValue,1,2)
+#     print("--- %s seconds ---" % (time.time() - start_time))
+#     return finalColumnNumber
 
 def randomAgent(arrayRep,validRowValue):
     randomcol = random.randint(0, 4)

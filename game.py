@@ -103,3 +103,11 @@ def victory(arrayRep, x):
                         return 1
 
     return 0
+
+def tie(arrayRep):
+    for i in range(len(arrayRep)):
+
+        for j in range(len(arrayRep[i])):
+            if arrayRep[i][j]==0:
+                return False
+    return True
