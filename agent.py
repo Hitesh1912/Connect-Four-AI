@@ -8,7 +8,7 @@ def userInput(arrayRep,validRowValue):
     if column.isalpha():
         return userInput(arrayRep, validRowValue)
     if column=="" or column=="EOF" or int(column) not in range(0,6):
-         return userInput(arrayRep, validRowValue)
+        return userInput(arrayRep, validRowValue)
     column=int(column)
     if validRowValue[column] < 6:
        return column
