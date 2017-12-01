@@ -290,6 +290,32 @@ class Negamax:
                                     return 9955
                                 if arrayRep[i-2][j+2]==0 and arrayRep[i-1][j+1]==opponent_number and validRowValue[j+2]==i-2:
                                     return 9955
+
+
+                        #attack connect 3
+            for i in range(len(arrayRep)):
+
+                for j in range(len(arrayRep[i])):
+
+                    # Vertical connect 3 Attack
+                    if i<3:
+                        if arrayRep[i][j] == agent_number and arrayRep[i+1][j] == agent_number:
+                            if validRowValue[j] == i+2:
+                                return 3000
+
+                    # Horizontal connect 3 Attack
+
+                    if j<4:
+                        if arrayRep[i][j] == agent_number and arrayRep[i][j+1] == agent_number:
+                            if validRowValue[j+2] == i:
+                                return 3000
+                            if validRowValue[j-1] == i:
+                                return 3000
+
+                    elif arrayRep[i][4] == 0 and validRowValue[4] == i:
+                        if arrayRep[i][5] == agent_number and arrayRep[i][6] == agent_number:
+                            return 3000
+
             import random
 
             randomScore = random.randint(0, 80)

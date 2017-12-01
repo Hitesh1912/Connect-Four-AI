@@ -10,7 +10,7 @@ def printing_on_screen(x,y,z):
     if z==2:
      player_circle(y,x)
     turtle.update()
-    #time.sleep(1)
+    time.sleep(2)
 
 def screen_limit(w,h):
     turtle.setup(width=w*75,height=h*75)
