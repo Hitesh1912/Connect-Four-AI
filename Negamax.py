@@ -318,6 +318,6 @@ class Negamax:
 
             import random
 
-            randomScore = random.randint(0, 80)
+            randomScore = random.randint(0, 2000)
             print "Checking here", randomScore
             return randomScore
