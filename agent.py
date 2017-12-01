@@ -7,7 +7,7 @@ def userInput(arrayRep,validRowValue):
     column = raw_input("Please enter a column between 0-6: ")
     if column.isalpha():
         return userInput(arrayRep, validRowValue)
-    if column=="" or column=="EOF" or int(column) not in range(0,6):
+    if column=="" or column=="EOF" or int(column) not in range(0,7):
         return userInput(arrayRep, validRowValue)
     column=int(column)
     if validRowValue[column] < 6:
@@ -18,7 +18,7 @@ def userInput(arrayRep,validRowValue):
 
 def agentMove(arrayRep,validRowValue):
     start_time = time.time()
-    agentObj=Negamax(arrayRep,validRowValue,6)
+    agentObj=Negamax(arrayRep,validRowValue,4)
     finalColumnNumber=agentObj.getMove(arrayRep,validRowValue,1,2)
     print("--- %s seconds ---" % (time.time() - start_time))
     return finalColumnNumber

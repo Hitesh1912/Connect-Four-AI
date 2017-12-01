@@ -58,7 +58,7 @@ class Negamax:
         if best_action is None:
             best_score=self.evaluation_func(arrRep,validRowValue,agent_number,opponent_number)
         self.stateScore[hashValue]=best_score
-        return best_action, alpha
+        return best_action, best_score
 
     def evaluation_func(self,arrayRep,validRowValue,agent_number,opponent_number):
             for i in range(len(arrayRep)):
@@ -78,18 +78,19 @@ class Negamax:
 
                     # Horizontal connect 4 Attack
 
-                    if j < 4:
+                    if j <= 4:
 
                         if arrayRep[i][j] == agent_number and arrayRep[i][j + 1] == agent_number and arrayRep[i][j + 2] == agent_number:
 
-                            #print "Checking here::"
+                            print "Checking here::"
 
                             if validRowValue[j + 3] == i:
 
-                                #return j + 3
+                                print "return j + 3"
                                 return 10000
 
                             elif validRowValue[j - 1] == i:
+                                print "return j -1"
                                 return 10000
 
                                 # return j - 1
@@ -162,6 +163,7 @@ class Negamax:
                                     return 9999
                                     # return j + 1
             import random
-            #print "Checking here",arrayRep
-            randomcol = random.randint(0, 80)
+
+            randomcol = random.randint(0, 8)
+            print "Checking here", randomcol
             return randomcol
