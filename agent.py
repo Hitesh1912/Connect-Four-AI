@@ -1,28 +1,32 @@
 import random
+import time
+
 from Negamax import Negamax
 def userInput(arrayRep,validRowValue):
 
-    column = int(input("Please enter a column between 0-6: "))
-    if 0 <= column <= 6:
-        if validRowValue[column] < 6:
-            return column
-        else:
-            return userInput(arrayRep,validRowValue)
+    column = raw_input("Please enter a column between 0-6: ")
+    if column.isalpha():
+        return userInput(arrayRep, validRowValue)
+    if column=="" or column=="EOF" or int(column) not in range(0,6):
+         return userInput(arrayRep, validRowValue)
+    column=int(column)
+    if validRowValue[column] < 6:
+       return column
     else:
-        return userInput(arrayRep,validRowValue)
-
+       return userInput(arrayRep,validRowValue)
 
 
 def agentMove(arrayRep,validRowValue):
-    agentObj=Negamax(arrayRep,validRowValue,3)
+    start_time = time.time()
+    agentObj=Negamax(arrayRep,validRowValue,6)
     finalColumnNumber=agentObj.getMove(arrayRep,validRowValue,1,2)
+    print("--- %s seconds ---" % (time.time() - start_time))
     return finalColumnNumber
     #return hardCodedAI(arrayRep,validRowValue)
 
 
 def randomAgent(arrayRep,validRowValue):
-    randomcol = random.randint(0, 6)
-    print "randomcol", randomcol
+    randomcol = random.randint(0, 4)
     if validRowValue[randomcol] < 6:
         return randomcol
     else:
