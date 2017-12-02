@@ -14,8 +14,12 @@ def gameMoves():
         ConnectFourGrid.printing_on_screen(rowNumber, colInputFromUser, 2)
         arrayRep[rowNumber][colInputFromUser] = 2
         validRowValue[colInputFromUser] += 1
-        if game.victory(arrayRep,2)==1 or game.tie(arrayRep):
+        if game.victory(arrayRep,2)==1:
             print"Red won"
+            time.sleep(10)
+            break
+        if game.tie(arrayRep):
+            print "Match tied"
             time.sleep(10)
             break
         colInputFromAgent = agent.agentMove(arrayRep,validRowValue)
@@ -23,11 +27,14 @@ def gameMoves():
         ConnectFourGrid.printing_on_screen(rowNumberAgent, colInputFromAgent, 1)
         arrayRep[rowNumberAgent][colInputFromAgent] = 1
         validRowValue[colInputFromAgent] += 1
-        if game.victory(arrayRep, 1) == 1 or game.tie(arrayRep):
+        if game.victory(arrayRep, 1) == 1:
             print "Blue won"
             time.sleep(10)
             break
-
+        if game.tie(arrayRep):
+            print "Match tied"
+            time.sleep(10)
+            break
 
 if __name__== "__main__":
     gameMoves()
