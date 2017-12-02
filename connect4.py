@@ -2,7 +2,11 @@ import ConnectFourGrid
 import game
 import agent
 import time
+
+
+
 def gameMoves():
+
     arrayRep = [[0 for x in range(7)] for y in range(6)]
     validRowValue = [0 for x in range(7)]
     arrayRep[0][3]=1
@@ -36,5 +40,5 @@ def gameMoves():
             time.sleep(10)
             break
 
-if __name__== "__main__":
+if __name__ == "__main__":
     gameMoves()
