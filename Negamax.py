@@ -4,7 +4,6 @@ import random
 import hashlib
 
 
-
 # Negamax implementation
 
 class Negamax:
@@ -16,20 +15,9 @@ class Negamax:
 
     def getMove(self,arrRep,validRowValue,agent_number,opponent_number):
         move, score = self.negaMaxEval(arrRep, agent_number,opponent_number,0,validRowValue,-99999,10000)
-        # if move == None:
-        #     number = random.randint(0, 6)
-        #     print "before while", number
-        #     while validRowValue[number] > 6:
-        #         number = random.randint(0, 6)
-        #         print "Inside while", number
-        #     print "Entering number",number
-        #     return number
-        # print "Final:",score
         return move
 
     def negaMaxEval(self,arrRep,agent_number,opponent_number,depth,validRowValue,alpha,beta):
-
-        #hashValue=hash(frozenset[arrRep])
         hashValue = hashlib.sha256(str(arrRep).encode('utf-8', 'ignore')).hexdigest()
         count=0
         if hashValue in self.stateScore:
@@ -70,7 +58,6 @@ class Negamax:
             if alpha >= beta:
                 break
         if best_action is None:
-            # print "I was here"
             best_score=self.evaluation_func(arrRep,validRowValue,agent_number,opponent_number)
         self.stateScore[hashValue]=best_score
         return best_action, best_score
@@ -81,49 +68,34 @@ class Negamax:
                 for j in range(len(arrayRep[i])):
 
                     # Vertical connect 4 Attack
-
                     if arrayRep[i - 1][j] == agent_number and arrayRep[i - 2][j] == agent_number and arrayRep[i - 3][j] == agent_number:
-
-                        #print "Checking here Vertical::"
-
                         if validRowValue[j] == i:
                             return 10000
-                            #return j
-
 
                     # Horizontal connect-4 Attack
-
                     if j < 4:
 
                         if arrayRep[i][j] == agent_number and arrayRep[i][j + 1] == agent_number and arrayRep[i][j + 2] == agent_number:
-
-                            # print "Checking here::"
-
                             if validRowValue[j + 3] == i:
                                 return 10000
 
                             elif validRowValue[j - 1] == i:
                                 return 10000
 
-                                # return j - 1
-
                     # Disjoint horizontal connect 4 -Attack
-
                     if j < 4:
-
                         if arrayRep[i][j] == agent_number and arrayRep[i][j + 3] == agent_number:
 
                             if arrayRep[i][j + 1] == agent_number and arrayRep[i][j + 2] == 0:
 
                                 if validRowValue[j + 2] == i:
                                     return 10000
-                                    # return j + 2
 
                             elif arrayRep[i][j + 1] == 0 and arrayRep[i][j + 2] == agent_number:
 
                                 if validRowValue[j + 1] == i:
                                     return 10000
-                                    # return j + 1
+
                     # diagonal attack- 4
                     if arrayRep[i][j] == agent_number:
 
@@ -194,33 +166,21 @@ class Negamax:
                     # Checking for opponent vertical connect-4
 
                     if arrayRep[i - 1][j] == opponent_number and arrayRep[i - 2][j] == opponent_number and arrayRep[i - 3][j] == opponent_number:
-
-                        #print "Checking here Vertical::"
-
                         if validRowValue[j] == i:
                             return 9999
-                            # return j
 
                     # Checking for opponent horizontal connect-4
 
                     if j < 4:
-
                         if arrayRep[i][j] == opponent_number and arrayRep[i][j + 1] == opponent_number and arrayRep[i][j + 2] == opponent_number:
-
-                            #print "Checking here::"
 
                             if validRowValue[j + 3] == i:
                                 return 9999
 
-                                # return j + 3
-
                             elif validRowValue[j - 1] == i:
                                 return 9999
 
-                                # return j - 1
-
                     # Checking the disjoint horizontal connect-4
-
                     if j < 4:
 
                         if arrayRep[i][j] == opponent_number and arrayRep[i][j + 3] == opponent_number:
@@ -229,13 +189,12 @@ class Negamax:
 
                                 if validRowValue[j + 2] == i:
                                     return 9999
-                                    # return j + 2
 
                             elif arrayRep[i][j + 1] == 0 and arrayRep[i][j + 2] == opponent_number:
 
                                 if validRowValue[j + 1] == i:
                                     return 9999
-                                    # return j + 1
+
                     if arrayRep[i][j] == opponent_number:
 
                         if i <= 2 and j <= 3:
@@ -296,7 +255,7 @@ class Negamax:
 
 
 
-                        # attack connect 3
+            # attack connect 3
             for i in range(len(arrayRep)):
 
                 for j in range(len(arrayRep[i])):
@@ -308,7 +267,6 @@ class Negamax:
                                 return 3000
 
                     # Horizontal connect 3 Attack
-
                     if j < 4:
                         if arrayRep[i][j] == agent_number and arrayRep[i][j+1] == agent_number:
                             if validRowValue[j+2] == i:
@@ -326,7 +284,6 @@ class Negamax:
 
                     # horizontal disjoint 3 defence
                         if arrayRep[i][j] == opponent_number and arrayRep[i][j+2] == opponent_number and validRowValue[j+1]==i:
-                            # print"Entering diag disjoint def 3"
                             return 3090
                         # random
             if validRowValue[3] < 5:
@@ -381,13 +338,5 @@ class Negamax:
                             arrayRep[newRow + 1][0] = 0
 
 
-            # taking random move if none of above condition satisfy
-            #
-            # randomScore = random.randint(0, 6)
-            # print "Checking here", randomScore
-            # return randomScore
-            #
-
             randomScore = random.randint(1, 5)
-            # print "Checking here", randomScore
             return randomScore
