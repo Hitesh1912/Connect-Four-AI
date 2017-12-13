@@ -1,6 +1,7 @@
 import turtle, time
 
-
+#z=1 for the agent and z=2 for the player.
+# The coordinates of the new move is sent to turtle to display it on the screen
 def printing_on_screen(x, y, z):
     turtle.tracer(0, 0)
     screen_limit(7, 6)
@@ -43,7 +44,7 @@ def empty_grid():
 
     turtle.pu()
 
-
+#Blue is used to represent agent's piece
 def agent_circle(x, y):
     turtle.pencolor("blue")
     turtle.fillcolor("blue")
@@ -54,7 +55,7 @@ def agent_circle(x, y):
     turtle.end_fill()
     turtle.pu()
 
-
+#Red is used to represent opponent's piece
 def player_circle(x, y):
     turtle.pencolor("red")
     turtle.fillcolor("red")
