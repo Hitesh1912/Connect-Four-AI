@@ -1,7 +1,7 @@
-*Connect-4 AI:*
+**Connect-4 AI:**
 
 
-HOW TO RUN:
+**HOW TO RUN:**
 Requires Python 2.7
 Run the command line game with: "connect4.py"
 
