@@ -4,13 +4,14 @@ import random
 import hashlib
 
 
-# Negamax implementation
-
+# Implementation of Negamax Algorithm with aplha beta pruning, iterative deeping with max depth and transposition table
+# max_depth is sent from the agentMove method in agent.py
 class Negamax:
     def __init__(self,arrRep,validRowValue,max_depth):
         self.max_depth = max_depth
         self.arrRep=arrRep
         self.valueRowValue=validRowValue
+        # dictionary which is storing the game state and its respective score from the evaluation_func
         self.stateScore={}
 
     def getMove(self,arrRep,validRowValue,agent_number,opponent_number):
@@ -18,6 +19,7 @@ class Negamax:
         return move
 
     def negaMaxEval(self,arrRep,agent_number,opponent_number,depth,validRowValue,alpha,beta):
+        # hash value of the game state is obtained here
         hashValue = hashlib.sha256(str(arrRep).encode('utf-8', 'ignore')).hexdigest()
         count=0
         if hashValue in self.stateScore:
@@ -46,7 +48,7 @@ class Negamax:
             else:
                 best_submove, best_currscore = self.negaMaxEval(arrRep,opponent_number,agent_number,depth + 1,validRowValue,-beta,-alpha)
                 best_currscore *= -1
-            #Previous Arrayrep is restored.
+            # Previous Arrayrep is restored.
             rowNumber =validRowValue[current_column]
             arrRep[rowNumber-1][current_column]=0
             validRowValue[current_column]-= 1
@@ -61,6 +63,9 @@ class Negamax:
             best_score=self.evaluation_func(arrRep,validRowValue,agent_number,opponent_number)
         self.stateScore[hashValue]=best_score
         return best_action, best_score
+
+
+    # implemented evaluation function to compute scores based on different game scenerios
 
     def evaluation_func(self,arrayRep,validRowValue,agent_number,opponent_number):
             for i in range(len(arrayRep)):
@@ -255,18 +260,18 @@ class Negamax:
 
 
 
-            # attack connect 3
+            # checking agent's connect-3 attack
             for i in range(len(arrayRep)):
 
                 for j in range(len(arrayRep[i])):
 
-                    # Vertical connect 3 Attack
+                    # checking agent's vertical connect-3 attack
                     if i < 3:
                         if arrayRep[i][j] == agent_number and arrayRep[i+1][j] == agent_number:
                             if validRowValue[j] == i+2:
                                 return 3000
 
-                    # Horizontal connect 3 Attack
+                    # checking agent's Horizontal connect-3 Attack
                     if j < 4:
                         if arrayRep[i][j] == agent_number and arrayRep[i][j+1] == agent_number:
                             if validRowValue[j+2] == i:
@@ -277,19 +282,20 @@ class Negamax:
                         if arrayRep[i][5] == agent_number and arrayRep[i][6] == agent_number:
                             return 3005
 
-                    # horizontal disjoint attck-3
+                    # horizontal disjoint attack connect-3
                     if j <= 4:
                         if arrayRep[i][j] == agent_number and arrayRep[i][j+2] == agent_number and validRowValue[j+1]==i:
                                 return 3099
 
-                    # horizontal disjoint 3 defence
+                    # horizontal disjoint defense connect-3
                         if arrayRep[i][j] == opponent_number and arrayRep[i][j+2] == opponent_number and validRowValue[j+1]==i:
                             return 3090
-                        # random
+
+             # agent prefers to make the move in the center compared to corners and making sure that move doesn't result
+             # in the opponent winning in the next turn
             if validRowValue[3] < 5:
                 newRow = validRowValue[3]
                 arrayRep[newRow + 1][3] = opponent_number
-                # print "New row", newRow
                 if game.victory(arrayRep, opponent_number) != 1:
                                 arrayRep[newRow + 1][3] = 0
                                 return 4000
@@ -337,6 +343,3 @@ class Negamax:
                                 return 200
                             arrayRep[newRow + 1][0] = 0
 
-
-            randomScore = random.randint(1, 5)
-            return randomScore
