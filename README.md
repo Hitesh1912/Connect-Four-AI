@@ -1,4 +1,4 @@
-Connect-4 AI:
+*Connect-4 AI:*
 
 
 HOW TO RUN:
