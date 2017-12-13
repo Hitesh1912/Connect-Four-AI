@@ -1,8 +1,14 @@
+
+#The game's status is checked here. The victory,tie and validity of a move is checked in the methods here.
+
+#This method is used to check if a given column number is valid or not.
+#It returns the boolean indicating whether it is a valid move and
+# the current row number for the given column number for the game state
+
 def check_move(x, arrRep, validRowValue, playerNumber):
     allowed = True
     if validRowValue[x] >= 6:
         allowed = False
-    #rowNumber = validRowValue[x]
 
     if allowed:
         arrRep[validRowValue[x]][x] = playerNumber
@@ -10,7 +16,10 @@ def check_move(x, arrRep, validRowValue, playerNumber):
     return allowed, validRowValue
 
 
-# checking for game-over
+# checking for game-over condition.
+#  If the game-over condition is met,it returns the number to indicate who has won,
+#  the agent or the opponent and the victory status
+# In case the game is still in progress, None is returned.
 def game_over(arrRep, agent_number, opponent_number, current_column, validRowValue):
     isWinningMove = victory(arrRep, agent_number)
     if isWinningMove == 1:
@@ -28,8 +37,9 @@ def game_over(arrRep, agent_number, opponent_number, current_column, validRowVal
     return None, False # No one has won
 
 
-# checking for winning
+# checking for victory
 def victory(arrayRep, x):
+    #Horizontal victory is checked here
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
             if arrayRep[i][j] == x:
@@ -45,7 +55,7 @@ def victory(arrayRep, x):
 
                 elif arrayRep[i][j - 1] == x and arrayRep[i][j - 2] == x and arrayRep[i][j - 3] == x:
                     return 1
-
+    #vertical victory is checked here
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
             if arrayRep[i][j] == x:
@@ -55,7 +65,7 @@ def victory(arrayRep, x):
 
                 elif arrayRep[i - 1][j] == x and arrayRep[i - 2][j] == x and arrayRep[i - 3][j] == x:
                     return 1
-
+    # Diagonal victory is checked here
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
             if arrayRep[i][j] == x:
@@ -77,7 +87,7 @@ def victory(arrayRep, x):
 
     return 0
 
-# checking for tie
+# checking for tie. No empty spaces are detected in the grid.
 def tie(arrayRep):
     for i in range(len(arrayRep)):
         for j in range(len(arrayRep[i])):
