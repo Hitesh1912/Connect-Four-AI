@@ -8,3 +8,7 @@ Run the command line game with: "connect4.py"
 
 Blue piece represents the Agent and Red piece represents the opponent
 After a game is played, the program prompts the user to play again.
+
+
+
+![Connect-four](https://upload.wikimedia.org/wikipedia/commons/a/ad/Connect_Four.gif)
